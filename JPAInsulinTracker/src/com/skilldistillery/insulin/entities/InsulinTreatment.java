@@ -7,12 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
+@Table(name="insulin_treatment")
 public class InsulinTreatment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +29,7 @@ public class InsulinTreatment {
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIME)
-	@Column(name="treatement_time")
+	@Column(name="treatment_time")
 	private Date time; 
 	
 	private String type;

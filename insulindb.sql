@@ -21,14 +21,16 @@ USE `insulindb` ;
 DROP TABLE IF EXISTS `insulin_treatment` ;
 
 CREATE TABLE IF NOT EXISTS `insulin_treatment` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `units` INT NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `units` INT(11) NOT NULL,
   `treatement_date` DATETIME NOT NULL,
-  `treatment_time` TIMESTAMP NOT NULL,
+  `treatment_time` TIMESTAMP NULL DEFAULT NULL,
   `type` VARCHAR(45) NOT NULL,
-  `brand` VARCHAR(45) NULL,
+  `brand` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE = '';
 GRANT USAGE ON *.* TO insulin@localhost;
@@ -48,10 +50,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insulindb`;
-INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (1, 10, '2018-05-09', '07:00:00', 'slow', 'solo star');
-INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (2, 12, '2018-05-09', '19:15:00', 'slow', 'solo star');
-INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (3, 8, '2018-05-10', '08:00:00', 'slow', 'solo star');
-INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (4, 11, '2018-05-10', '20:10:15', 'slow', 'solo star');
-INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (5, 9, '2018-05-11', '07:36:04', 'slow', 'solo star');
+INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (1, 10, '2018-05-09 00:00:00', '2018-05-09 07:00:00', 'slow', 'solo star');
+INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (2, 12, '2018-05-09 00:00:00', '2018-05-09 19:00:00', 'slow', 'solo star');
+INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (3, 8, '2018-05-10 00:00:00', '2018-05-10 07:00:00', 'slow', 'solo star');
+INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (4, 11, '2018-05-10 00:00:00', '2018-05-10 19:00:00', 'slow', 'solo star');
+INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `treatment_time`, `type`, `brand`) VALUES (5, 9, '2018-05-11 00:00:00', '2018-05-11 08:00:00', 'slow', 'solo star');
 
 COMMIT;
