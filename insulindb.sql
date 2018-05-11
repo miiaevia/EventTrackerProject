@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `insulin_treatment` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `units` INT NOT NULL,
   `treatement_date` DATETIME NOT NULL,
-  `treatment_time` DATETIME NOT NULL,
+  `treatment_time` TIMESTAMP NOT NULL,
   `type` VARCHAR(45) NOT NULL,
   `brand` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
