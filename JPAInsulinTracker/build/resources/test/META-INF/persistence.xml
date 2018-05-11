@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
 	<!-- update name for each project -->
-	<persistence-unit name="Xtreme">
+	<persistence-unit name="Insulin">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 		<!-- add classes here -->
