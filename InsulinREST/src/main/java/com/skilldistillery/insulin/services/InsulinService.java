@@ -10,4 +10,6 @@ public interface InsulinService {
 	public InsulinTreatment show(int id);
 	
 	public InsulinTreatment create(InsulinTreatment t); 
+	
+	public InsulinTreatment update(InsulinTreatment t, int id); 
 }

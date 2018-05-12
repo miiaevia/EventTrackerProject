@@ -41,7 +41,7 @@ public class InsulinController {
 	
 	@RequestMapping(path = "treatments/{id}", method = RequestMethod.PATCH) 
 		public InsulinTreatment replace(@PathVariable int id, @RequestBody InsulinTreatment treatment) {
-			return null;
+			return insulinSvc.update(treatment, id);
 		}
 	
 	@RequestMapping(path = "treatments/{id}", method = RequestMethod.DELETE) 

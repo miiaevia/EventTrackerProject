@@ -23,6 +23,21 @@ public class InsulinServiceImpl implements InsulinService {
 
 	@Override
 	public InsulinTreatment create(InsulinTreatment t) {
-		return insulinRepo.saveAndFlush(t);
+		return insulinRepo.saveAndFlush(t);		
+	}
+
+	@Override
+	public InsulinTreatment update(InsulinTreatment t, int id) {
+		InsulinTreatment managedTreatment = insulinRepo.findById(id).get();
+		if (t.getBrand() != null || !t.getBrand().equals("")) {
+			managedTreatment.setBrand(t.getBrand());
+		}
+		if (t.getType() != null || !t.getType().equals("")) {
+			managedTreatment.setType(t.getType());
+		}
+		if (t.getUnits() != 0) {
+			managedTreatment.setUnits(t.getUnits());
+		}
+		return insulinRepo.saveAndFlush(managedTreatment);
 	}
 }
