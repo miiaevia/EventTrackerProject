@@ -12,4 +12,6 @@ public interface InsulinService {
 	public InsulinTreatment create(InsulinTreatment t); 
 	
 	public InsulinTreatment update(InsulinTreatment t, int id); 
+	
+	public Boolean destroy (int id); 
 }

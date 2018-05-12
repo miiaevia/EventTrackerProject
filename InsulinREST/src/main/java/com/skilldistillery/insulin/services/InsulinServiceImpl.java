@@ -40,4 +40,16 @@ public class InsulinServiceImpl implements InsulinService {
 		}
 		return insulinRepo.saveAndFlush(managedTreatment);
 	}
+
+	@Override
+	public Boolean destroy(int id) {
+		try {
+			insulinRepo.deleteById(id);
+			return true;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
