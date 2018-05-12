@@ -23,15 +23,10 @@ public class InsulinTreatment {
 	private int units;
 	
 	@CreationTimestamp
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="treatement_date")
-	private Date date; 
-	
-	@CreationTimestamp
-	@Temporal(TemporalType.TIME)
-	@Column(name="treatment_time")
-	private Date time; 
-	
+	private Date treatmentDate; 
+
 	private String type;
 	
 	private String brand; 
@@ -39,17 +34,18 @@ public class InsulinTreatment {
 	// contstructors
 	public InsulinTreatment() {	}
 
-	public InsulinTreatment(int id, int units, Date date, Date time, String type, String brand) {
+	public InsulinTreatment(int id, int units, Date treatmentDate, String type, String brand) {
 		super();
 		this.id = id;
 		this.units = units;
-		this.date = date;
-		this.time = time;
+		this.treatmentDate = treatmentDate;
 		this.type = type;
 		this.brand = brand;
 	}
-	
-	
+
+
+
+
 	//gets and sets
 	public int getId() {
 		return id;
@@ -67,22 +63,6 @@ public class InsulinTreatment {
 		this.units = units;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Date getTime() {
-		return time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
-	}
-
 	public String getType() {
 		return type;
 	}
@@ -98,6 +78,44 @@ public class InsulinTreatment {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
+
+	public Date getTreatmentDate() {
+		return treatmentDate;
+	}
+
+	public void setTreatmentDate(Date treatmentDate) {
+		this.treatmentDate = treatmentDate;
+	}
 	
+	//toString
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("InsulinTreatment [id=").append(id).append(", units=").append(units).append(", treatmentDate=")
+				.append(treatmentDate).append(", type=").append(type).append(", brand=").append(brand).append("]");
+		return builder.toString();
+	}
+
+	//hash/equals
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InsulinTreatment other = (InsulinTreatment) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
 }
