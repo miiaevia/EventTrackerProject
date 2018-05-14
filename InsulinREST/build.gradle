@@ -14,6 +14,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
 
 group = 'com.skilldistillery.insulin'
 version = '0.0.1-SNAPSHOT'
@@ -23,6 +24,11 @@ repositories {
 	mavenCentral()
 }
 
+war {
+enabled = true
+  archiveName = "{whatever you want to call the file}.war"
+  destinationDir = file("/WAR")
+}
 
 dependencies {
 	compile project(':JPAInsulinTracker')
@@ -30,6 +36,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	providedRuntime ('org.springframework.boot:spring-boot-starter-tomcat')
 	
 	compile 'org.junit.jupiter:junit-jupiter-api:5.0.1'
 	  testCompile('org.apiguardian:apiguardian-api:1.0.0')
