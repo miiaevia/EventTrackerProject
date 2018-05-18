@@ -24,6 +24,11 @@ public class InsulinController {
 		return "pong";
 	}
 	
+	@RequestMapping(path="/")
+	public String home() {
+		return "index.html";
+	}
+	
 	@RequestMapping(path="treatments", method = RequestMethod.GET)
 	public List<InsulinTreatment> index() {
 		return insulinSvc.index();
