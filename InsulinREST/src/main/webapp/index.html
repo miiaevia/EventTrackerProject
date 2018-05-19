@@ -7,8 +7,20 @@
 </head>
 <body>
 	<h1>Welcome to the Insulin Tracker</h1>
+	<form name="createNewTreatment">
+		<h4>Enter New Treatment:</h4>
+		<p>Units:</p><input type="number" name="units">
+		<p>Brand:</p><input type="text" name="brand">
+		<p>Type(fast/slow):</p><input type="text" name="type"><br><br>
+		<button name="createTreatment">Submit</button><br><br>
+	</form>
 	<form name="insulinForm">
-		<button name="lookupAll">View All Treatments</button>
+		<h4>Enter Treatment Id:</h4>
+		<input type="number" name="insulinId"><br><br>
+		<button name="updateTreatment">Update Treatment By Id</button><br>
+		<button name="deleteTreatment">Delete Treatment By Id</button><br><br>
+		<h4>View List of Treatments:</h4>
+		<button name="lookupAll">View All</button><br>
 	</form>
 </body>
 </html>
