@@ -208,6 +208,16 @@ function displayTreatment(treatment) {
 	}); 
 	form.appendChild(button); 
 	
+	//Delete button: <button name="deleteTreatment">Delete Treatment By Id</button><br><br>
+	var deleteButton = document.createElement('button');
+	deleteButton.textContent = 'Delete Treatment';
+	deleteButton.addEventListener('click', function(e){
+		e.preventDefault();
+		deleteTreatment(treatment); 
+		
+	});
+	form.appendChild(deleteButton); 
+	
 	tbody.appendChild(trow); 
 	table.appendChild(tbody); 
 	
@@ -334,4 +344,28 @@ function updateTreatment(e){
 	}
 	
 	xhr.send(treatmentJson); 
+}
+
+function deleteTreatment(treatment){
+	var tId = treatment.id;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open('DELETE', 'api/treatments/' + tId, true); 
+	
+	xhr.onreadystatechange = function(){
+		if(this.readyState === 4) {
+			if(this.status === 200) {
+				var div = document.createElement('div');
+				div.textContent = 'Treatment deleted'
+				document.body.appendChild(div); 
+			}
+			else {
+				var div = document.createElement('div');
+				div.textContent = 'Unable to delete treatment'; 
+				document.body.appendChild(div); 
+			}
+		}
+	}
+	
+	xhr.send(null);
 }
