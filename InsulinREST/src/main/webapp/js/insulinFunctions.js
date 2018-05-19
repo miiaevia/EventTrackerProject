@@ -169,13 +169,22 @@ function displayTreatmentById(treatment) {
 	var trow = document.createElement('tr'); 
 	var td1 = document.createElement('td'); 
 	var td2 = document.createElement('td');
+	var td3 = document.createElement('td');
+	var td4 = document.createElement('td');
+	var td5 = document.createElement('td');
 	
 	td1.textContent = treatment.treatmentDate.substring(0,10);
-	console.log(treatment.treatmentDate); 
-	td2.textConent = treatment.treatmentDate; 
+//	console.log(treatment.treatmentDate); 
+	td2.textContent = treatment.treatmentDate.substring(12, 16); 
+	td3.textContent = treatment.units;
+	td4.textContent = treatment.brand;
+	td5.textContent = treatment.type;
 	
 	trow.appendChild(td1);
 	trow.appendChild(td2); 
+	trow.appendChild(td3);
+	trow.appendChild(td4);
+	trow.appendChild(td5);
 	tbody.appendChild(trow); 
 	table.appendChild(tbody); 
 	
