@@ -12,6 +12,7 @@ function getEventListeners(){
 	document.insulinForm.lookupAll.addEventListener('click', getAllTreatments);
 	//Create New Treatment Button
 	document.createNewTreatment.save.addEventListener('click', sendNewTreatment);
+	
 };
 
 
@@ -194,11 +195,25 @@ function displayTreatment(treatment) {
 	trow.appendChild(td3);
 	trow.appendChild(td4);
 	trow.appendChild(td5);
+	
+	// Update button: <button name="updateTreatmentForm">Update Treatment</button><br>
+	var form = document.createElement('form');
+	var button = document.createElement('button');
+//	button.setAttribute('name','updateTreatmentForm');
+	button.textContent = 'Update Treatment'; 
+	button.addEventListener('click', function(e){
+		e.preventDefault();
+//		console.log(treatment); 
+		displayUpdateForm(treatment);
+	}); 
+	form.appendChild(button); 
+	
 	tbody.appendChild(trow); 
 	table.appendChild(tbody); 
 	
 	div.appendChild(table);
 	document.body.appendChild(div);
+	document.body.appendChild(form);
 }
 
 
@@ -228,7 +243,7 @@ function sendNewTreatment(evt) {
 				displayTreatment(newTreatmentObj);
 			}
 			else {
-				displayTreatmentNotCreated();
+				displayTreatmentNotSaved();
 			}
 		}
 	}
@@ -236,8 +251,87 @@ function sendNewTreatment(evt) {
 	xhr.send(treatmentJson);
 }
 
-function displayTreatmentNotCreated(){
+function displayTreatmentNotSaved(){
 	var div = document.createElement('div');
 	div.textContent = 'Unable to save treatment, please try again.';
 	document.body.appendChild(div); 
+}
+
+
+//UPDATE TREATMENT
+function displayUpdateForm(treatment){
+//	console.log(treatment); 
+	var form = document.getElementById('updateTreatment'); 
+	var header = document.createElement('h4');
+	header.textContent = 'Update Treatment:';
+	form.appendChild(header); 
+	
+	var p1 = document.createElement('p');
+	p1.textContent = 'Units:';
+	var input1 = document.createElement('input');
+	input1.setAttribute('type', 'number');
+	input1.setAttribute('name', 'units');
+//	console.log(treatment.units);
+	input1.setAttribute('value', treatment.units);
+	
+	var p2 = document.createElement('p');
+	p2.textContent = 'Brand:';
+	var input2 = document.createElement('input');
+	input2.setAttribute('type', 'text');
+	input2.setAttribute('name', 'brand');
+	input2.setAttribute('value', treatment.brand);
+	
+	var p3 = document.createElement('p');
+	p3.textContent = 'Type:';
+	var input3 = document.createElement('input');
+	input3.setAttribute('type', 'text');
+	input3.setAttribute('name', 'type');
+	input3.setAttribute('value', treatment.type);
+	
+	var button = document.createElement('button');
+	button.setAttribute('id', treatment.id);
+	button.textContent = 'Submit';
+	button.addEventListener('click', updateTreatment);
+	
+	form.appendChild(p1);
+	form.appendChild(input1);
+	form.appendChild(p2);
+	form.appendChild(input2);
+	form.appendChild(p3);
+	form.appendChild(input3);
+	form.appendChild(button); 
+	
+}
+
+function updateTreatment(e){
+	e.preventDefault();
+//	console.log(e); 
+	var form = document.updateTreatment; 
+	var insulinTreatment = {
+			units: form.units.value,
+			type: form.type.value,
+			brand: form.brand.value
+		};
+//	console.log(insulinTreatment); 
+	var treatmentJson = JSON.stringify(insulinTreatment); 
+	var xhr = new XMLHttpRequest();
+//	console.log(this.id);
+	xhr.open('PATCH', 'api/treatments/' + this.id, true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	
+	xhr.onreadystatechange = function(){
+		if(this.readyState === 4){
+			if(this.status === 200) {
+				var updatedTreatmentJson = this.responseText;
+				var updatedTreatmentObj = JSON.parse(updatedTreatmentJson);
+				
+				displayTreatment(updatedTreatmentObj);
+			}
+		}
+		else {
+			displayTreatmentNotSaved();
+		}
+	}
+	
+	xhr.send(treatmentJson); 
 }
