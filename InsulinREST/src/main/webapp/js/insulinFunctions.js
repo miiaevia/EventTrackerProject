@@ -9,9 +9,14 @@ function init(){
 
 function getEventListeners(){
 	//View All Treatments Button
-	document.insulinForm.lookupAll.addEventListener('click', getAllTreatments)
+	document.insulinForm.lookupAll.addEventListener('click', getAllTreatments);
+	//Create New Treatment Button
+	document.createNewTreatment.save.addEventListener('click', sendNewTreatment);
 };
 
+
+
+// GET ALL TREATMENTS
 function getAllTreatments(evt){
 	evt.preventDefault();
 	var xhr = new XMLHttpRequest();
@@ -87,10 +92,15 @@ function displayTreatments(treatments){
 	table.appendChild(tbody);
 }
 
+
+
+
+// GET SINGLE TREATMENT
 function addEventListenerId(tdId, id){
 //	console.log(tdId);
 	tdId.addEventListener('click', function(e){
-		console.log(id); 
+		e.preventDefault(); 
+//		console.log(id); 
 		getTreatmentById(id); 
 	});
 	}
@@ -102,8 +112,7 @@ function displayTreatmentsNotFound(){
 }
 
 function getTreatmentById(id){
-	// do I want to do evt.preventDefault(); ??? test both ways
-	console.log(id); 
+//	console.log(id); 
 	var xhr = new XMLHttpRequest();
 	
 	xhr.open('GET', "api/treatments/" + id, true);
@@ -117,7 +126,7 @@ function getTreatmentById(id){
 				var treatmentJson = this.responseText;
 				var treatment = JSON.parse(treatmentJson); 
 //				console.log(treatment); 
-				displayTreatmentById(treatment); 
+				displayTreatment(treatment); 
 			}
 			else {
 				displayTreatmentNotFound(); 
@@ -134,7 +143,7 @@ function displayTreatmentNotFound(){
 	document.body.appendChild(div); 
 }
 
-function displayTreatmentById(treatment) {
+function displayTreatment(treatment) {
 	var div = document.createElement('div'); 
 	
 	var table = document.createElement('table'); 
@@ -190,4 +199,45 @@ function displayTreatmentById(treatment) {
 	
 	div.appendChild(table);
 	document.body.appendChild(div);
+}
+
+
+
+
+// CREATE NEW TREATMENT
+function sendNewTreatment(evt) {
+	evt.preventDefault(); 
+	var form = document.createNewTreatment;
+	var insulinTreatment = {
+		units: form.units.value,
+		type: form.type.value,
+		brand: form.brand.value
+	};
+//	console.log(insulinTreatment);
+	var treatmentJson = JSON.stringify(insulinTreatment); 
+//	console.log(treatmentJson); 
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'api/treatments', true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onreadystatechange = function(){
+		if(this.readyState === 4) {
+			if(this.status === 200 || this.status === 201){
+				var newTreatmentJson = this.responseText;
+				var newTreatmentObj = JSON.parse(newTreatmentJson);
+				
+				displayTreatment(newTreatmentObj);
+			}
+			else {
+				displayTreatmentNotCreated();
+			}
+		}
+	}
+	
+	xhr.send(treatmentJson);
+}
+
+function displayTreatmentNotCreated(){
+	var div = document.createElement('div');
+	div.textContent = 'Unable to save treatment, please try again.';
+	document.body.appendChild(div); 
 }
