@@ -12,7 +12,8 @@ function getEventListeners(){
 	document.insulinForm.lookupAll.addEventListener('click', getAllTreatments);
 	//Create New Treatment Button
 	document.createNewTreatment.save.addEventListener('click', sendNewTreatment);
-	
+	//Total Avg Units/Treatment Button
+	document.insulinForm.aggData.addEventListener('click', viewAvgUnitsPerTreatment); 
 };
 
 
@@ -368,4 +369,30 @@ function deleteTreatment(treatment){
 	}
 	
 	xhr.send(null);
+}
+
+// View Avg Units/Treatment
+function viewAvgUnitsPerTreatment(e){
+	e.preventDefault(); 
+//	console.log(e); 
+	
+var xhr = new XMLHttpRequest();
+	xhr.open('GET', "api/treatments/totalAvgUnits" , true);
+	
+	xhr.onreadystatechange = function(){
+		if (xhr.readyState === 4) {
+			if(xhr.status === 200){
+//				console.log(xhr.readyState);
+				var avgUnitsJson = this.responseText;
+				var avgUnits = JSON.parse(avgUnitsJson); 
+				console.log(avgUnits); 
+				//call display method
+			}
+			else {
+				//new display method
+			}
+		}
+	}
+	
+	xhr.send(null); 
 }

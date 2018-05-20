@@ -53,4 +53,9 @@ public class InsulinController {
 		public Boolean destroy(@PathVariable int id) {
 			return insulinSvc.destroy(id);
 	}
+	
+	@RequestMapping(path = "treatments/totalAvgUnits", method = RequestMethod.GET)
+	public Integer getTotalAvgUnits() {
+		return insulinSvc.totalAvgUnits(); 
+	}
 }

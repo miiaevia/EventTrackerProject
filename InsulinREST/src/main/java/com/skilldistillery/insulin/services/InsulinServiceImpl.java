@@ -52,4 +52,18 @@ public class InsulinServiceImpl implements InsulinService {
 		}
 		return false;
 	}
+
+	@Override
+	public Integer totalAvgUnits() {
+		List<InsulinTreatment> treatments = insulinRepo.findAll(); 
+		Integer total = 0;
+		Integer avg = 0;
+		for ( InsulinTreatment t : treatments) {
+			total += t.getUnits();
+		}
+		avg = total / treatments.size();
+		return avg;
+	}
+	
+	
 }
