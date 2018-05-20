@@ -387,6 +387,7 @@ var xhr = new XMLHttpRequest();
 				var avgUnits = JSON.parse(avgUnitsJson); 
 				console.log(avgUnits); 
 				//call display method
+				displayAvgUnitsPerTreatment(avgUnits);
 			}
 			else {
 				//new display method
@@ -395,4 +396,16 @@ var xhr = new XMLHttpRequest();
 	}
 	
 	xhr.send(null); 
+}
+
+function displayAvgUnitsPerTreatment(avgUnits){
+	var div = document.createElement('div');
+	div.textContent = 'Average Units of Insulin/Treatment: ' + avgUnits; 
+	document.body.appendChild(div); 
+}
+
+function noAvgUnitsFound(){
+	var div = document.createElement('div');
+	div.textContent = 'Unable to calculate average units at this time. Please try later.'; 
+	document.body.appendChild(div); 
 }
