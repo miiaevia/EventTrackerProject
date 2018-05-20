@@ -16,3 +16,4 @@ public class InsulinRestApplication extends SpringBootServletInitializer{
 		SpringApplication.run(InsulinRestApplication.class, args);
 	}
 }
+
