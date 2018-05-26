@@ -51,5 +51,15 @@ export class TreatmentService {
       );
   }
 
+  // getAvgUT() {
+  //   return this.http.get(this.url + '/totalAvgUnits')
+  //     .pipe(
+  //       catchError((err: any) => {
+  //         console.log(err);
+  //         return throwError('KABOOM on Avg Units/Treatment Svc');
+  //       })
+  //     );
+  // }
+
   constructor(private http: HttpClient) {}
 }

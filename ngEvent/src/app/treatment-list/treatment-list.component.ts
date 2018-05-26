@@ -14,6 +14,7 @@ export class TreatmentListComponent implements OnInit {
   title = 'Insulin Tracker';
   display = null;
   edit = null;
+  avgUnitsTreatment: number = null;
 
   reload = function() {
     this.treatmentService
@@ -21,7 +22,7 @@ export class TreatmentListComponent implements OnInit {
       .subscribe(
         data => (this.treatments = data),
         err => console.error('Observer got an error: ' + err)
-      );
+    );
   };
 
   displayTreatment = function(treatment: Treatment) {
@@ -32,6 +33,15 @@ export class TreatmentListComponent implements OnInit {
   displayTable = function() {
     this.display = null;
   };
+
+  // getAverageUnitsPerTreatment = function () {
+  //   console.log('called avg units/treatment method');
+  //   this.treatmentService
+  //     .getAvgUT
+  //     .subscribe(
+  //       data => (this.avgUnitsTreatment = data),
+  //       err => console.error('Observer for avg units/tmt got an error: ' + err));
+  // };
 
   addTreatment = function(newTreatment: Treatment) {
     console.log(newTreatment);
@@ -53,20 +63,17 @@ export class TreatmentListComponent implements OnInit {
     this.display = null;
   };
 
-  deleteTreatment = function (tid: number) {
+  deleteTreatment = function(tid: number) {
     console.log('deleteTreatment method called');
     console.log(tid);
-    this.treatmentService
-      .destroy(tid)
-      .subscribe(data => this.reload(), err => console.log(err));
+    this.treatmentService.destroy(tid).subscribe(data => this.reload(), err => console.log(err));
   };
 
-  constructor(
-    private treatmentService: TreatmentService
-    // private datePipe: DatePipe
-  ) { }
+  constructor(private treatmentService: TreatmentService) { } // private datePipe: DatePipe
+
 
   ngOnInit() {
     this.reload();
+    // this.getAverageUnitsPerTreatment();
   }
 }
