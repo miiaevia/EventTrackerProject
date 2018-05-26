@@ -23,8 +23,8 @@ DROP TABLE IF EXISTS `insulin_treatment` ;
 CREATE TABLE IF NOT EXISTS `insulin_treatment` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `units` INT(11) NOT NULL,
-  `treatement_date` DATETIME NOT NULL DEFAULT current_timestamp,
-  `type` VARCHAR(45) NOT NULL,
+  `treatement_date` DATETIME NULL DEFAULT current_timestamp,
+  `type` VARCHAR(45) NULL,
   `brand` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -56,3 +56,4 @@ INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `type`, `bran
 INSERT INTO `insulin_treatment` (`id`, `units`, `treatement_date`, `type`, `brand`) VALUES (5, 9, '2018-05-11 00:00:00', 'slow', 'solo star');
 
 COMMIT;
+

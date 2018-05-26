@@ -1,0 +1,41 @@
+<h1>{{title}}</h1>
+
+<!-- New Treatment Form -->
+<div *ngIf="!display" class="form-group">
+  <br>
+  <form>
+    Units:<input type="number" name="units" [(ngModel)]="treatment.units" class="form-control col-md-4" placeholder="Treatment Units" />
+    <button type="submit" (click)="addTreatment(treatment);" class="btn btn-primary">Add</button>
+  </form>
+</div>
+
+<!-- Show All Treatments -->
+<table *ngIf="!display" class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Units</th>
+      <th scope="col">Date</th>
+      <th scope="col">Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let treatment of treatments">
+      <td (click)="displayTreatment(treatment);">{{treatment.units}}</td>
+      <td (click)="displayTreatment(treatment);">{{treatment.date | date:'shortDate'}}</td>
+      <td>
+        <button type="submit" (click)="deleteTreatment(treatment.id);" class="btn btn-danger">X</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Detail View -->
+<div *ngIf="display && !editTreatment" class="container">
+  <h4>Treatment:</h4>
+  <p>Id: {{display.id}}</p>
+  <p>Units: {{display.units}}</p>
+  <p>Type: {{display.type}}</p>
+  <p>Brand: {{display.brand}}</p>
+  <button (click)="displayTable();" class="btn btn-info">View All Treatments</button>
+  <!-- <button (click)="setEditTodo();" class="btn btn-primary">Edit</button> -->
+</div>
