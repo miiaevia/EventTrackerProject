@@ -13,7 +13,7 @@ public interface InsulinService {
 	
 	public InsulinTreatment update(InsulinTreatment t, int id); 
 	
-	public Boolean destroy (int id); 
+	public void destroy (int id); 
 	
 	public Integer totalAvgUnits();
 }

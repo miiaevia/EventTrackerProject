@@ -42,15 +42,13 @@ public class InsulinServiceImpl implements InsulinService {
 	}
 
 	@Override
-	public Boolean destroy(int id) {
+	public void destroy(int id) {
 		try {
 			insulinRepo.deleteById(id);
-			return true;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return false;
 	}
 
 	@Override

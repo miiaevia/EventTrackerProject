@@ -41,5 +41,15 @@ export class TreatmentService {
       );
   }
 
+  destroy(tid: number) {
+    return this.http.delete<Treatment>(this.url + '/' + tid)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM on DESTROY');
+        })
+      );
+  }
+
   constructor(private http: HttpClient) {}
 }

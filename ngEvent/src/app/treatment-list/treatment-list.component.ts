@@ -53,8 +53,12 @@ export class TreatmentListComponent implements OnInit {
     this.display = null;
   };
 
-  deleteTreatment = function(tid: number) {
-    console.log('deleteTreatment called');
+  deleteTreatment = function (tid: number) {
+    console.log('deleteTreatment method called');
+    console.log(tid);
+    this.treatmentService
+      .destroy(tid)
+      .subscribe(data => this.reload(), err => console.log(err));
   };
 
   constructor(
