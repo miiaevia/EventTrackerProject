@@ -46,7 +46,7 @@ public class InsulinController {
 		return insulinSvc.create(treatment);
 	}
 	
-	@RequestMapping(path = "treatments/{id}", method = RequestMethod.PATCH) 
+	@RequestMapping(path = "treatments/{id}", method = RequestMethod.PUT) 
 		public InsulinTreatment replace(@PathVariable int id, @RequestBody InsulinTreatment treatment) {
 			return insulinSvc.update(treatment, id);
 		}

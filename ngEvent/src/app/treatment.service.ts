@@ -29,5 +29,17 @@ export class TreatmentService {
     );
   }
 
+  update(tid: number, editedTreatment: Treatment) {
+    console.log(editedTreatment);
+
+
+    return this.http.put<Treatment>(this.url + '/' + tid, editedTreatment)
+      .pipe(catchError((err: any) => {
+        console.log(err);
+        return throwError('KABOOM on UPDATE');
+      })
+      );
+  }
+
   constructor(private http: HttpClient) {}
 }

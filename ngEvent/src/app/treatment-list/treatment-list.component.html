@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 
 <!-- New Treatment Form -->
-<div *ngIf="!display" class="form-group">
+<div *ngIf="!display && !edit" class="form-group">
   <br>
   <form>
     Units:<input type="number" name="units" [(ngModel)]="treatment.units" class="form-control col-md-4" placeholder="Treatment Units" />
@@ -10,7 +10,7 @@
 </div>
 
 <!-- Show All Treatments -->
-<table *ngIf="!display" class="table table-striped">
+<table *ngIf="!display && !edit" class="table table-striped">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Units</th>
@@ -30,12 +30,29 @@
 </table>
 
 <!-- Detail View -->
-<div *ngIf="display && !editTreatment" class="container">
+<div *ngIf="display && !edit" class="container">
   <h4>Treatment:</h4>
   <p>Id: {{display.id}}</p>
   <p>Units: {{display.units}}</p>
   <p>Type: {{display.type}}</p>
   <p>Brand: {{display.brand}}</p>
   <button (click)="displayTable();" class="btn btn-info">View All Treatments</button>
-  <!-- <button (click)="setEditTodo();" class="btn btn-primary">Edit</button> -->
+  <button (click)="displayEdit();" class="btn btn-primary">Edit</button>
+</div>
+
+<!-- Edit Treatment Form -->
+<div class="form-group" *ngIf="edit">
+  <form>
+    <label>Units:</label>
+    <input type="number" name="task" [(ngModel)]="edit.units" class="form-control col-md-3" />
+    <br>
+    <label>Type:</label>
+    <input type="text" name="type" [(ngModel)]="edit.type" class="form-control col-md-3" />
+    <br>
+    <label>Brand:</label>
+    <input type="text" name="brand" [(ngModel)]="edit.brand" class="form-control col-md-3" />
+    <br>
+    <button (click)="updateTreatment(edit.id, edit)" class="btn btn-primary">Save</button>
+    <button (click)="edit = null" class="btn btn-secondary">Cancel</button>
+  </form>
 </div>

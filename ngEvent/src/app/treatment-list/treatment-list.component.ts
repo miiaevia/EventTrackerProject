@@ -1,6 +1,7 @@
 import { TreatmentService } from './../treatment.service';
 import { Component, OnInit } from '@angular/core';
 import { Treatment } from '../models/treatment';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-treatment-list',
@@ -9,9 +10,10 @@ import { Treatment } from '../models/treatment';
 })
 export class TreatmentListComponent implements OnInit {
   treatments: Treatment[] = [];
+  treatment = new Treatment();
   title = 'Insulin Tracker';
   display = null;
-  treatment = new Treatment();
+  edit = null;
 
   reload = function() {
     this.treatmentService
@@ -27,21 +29,38 @@ export class TreatmentListComponent implements OnInit {
     this.display = treatment;
   };
 
-  displayTable = function () {
+  displayTable = function() {
     this.display = null;
   };
 
-  addTreatment = function (newTreatment: Treatment) {
+  addTreatment = function(newTreatment: Treatment) {
     console.log(newTreatment);
-    this.treatmentService.create(newTreatment).subscribe(data => this.reload(), err => console.log(err));
+    this.treatmentService
+      .create(newTreatment)
+      .subscribe(data => this.reload(), err => console.log(err));
     this.newTreatment = new Treatment();
+  };
+
+  displayEdit = function() {
+    this.edit = Object.assign({}, this.display);
+  };
+
+  updateTreatment = function(tid: number, editedTreatment: Treatment) {
+    this.treatmentService
+      .update(tid, editedTreatment)
+      .subscribe(data => this.reload(), err => console.log(err));
+    this.edit = null;
+    this.display = null;
   };
 
   deleteTreatment = function(tid: number) {
     console.log('deleteTreatment called');
   };
 
-  constructor(private treatmentService: TreatmentService) {}
+  constructor(
+    private treatmentService: TreatmentService
+    // private datePipe: DatePipe
+  ) { }
 
   ngOnInit() {
     this.reload();
