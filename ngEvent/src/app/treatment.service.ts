@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { Treatment } from './models/treatment';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +62,7 @@ export class TreatmentService {
   //     );
   // }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private date: DatePipe
+  ) { }
 }

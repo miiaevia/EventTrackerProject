@@ -16,15 +16,15 @@
 <table *ngIf="!display && !edit" class="table table-striped">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Units</th>
       <th scope="col">Date</th>
+      <th scope="col">Units</th>
       <th scope="col">Remove</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let treatment of treatments">
-      <td (click)="displayTreatment(treatment);">{{treatment.units}}</td>
       <td (click)="displayTreatment(treatment);">{{treatment.date | date:'shortDate'}}</td>
+      <td (click)="displayTreatment(treatment);">{{treatment.units}}</td>
       <td>
         <button type="submit" (click)="deleteTreatment(treatment.id);" class="btn btn-danger">X</button>
       </td>

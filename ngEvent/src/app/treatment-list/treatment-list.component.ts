@@ -1,7 +1,7 @@
 import { TreatmentService } from './../treatment.service';
 import { Component, OnInit } from '@angular/core';
 import { Treatment } from '../models/treatment';
-import { DatePipe } from '@angular/common';
+// import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-treatment-list',
